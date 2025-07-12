@@ -4,7 +4,7 @@
         <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
                 <span class="app-brand-logo demo">
-                    <span class="text-primary">[SVG Logo Here]</span>
+                    <span class="text-primary"></span>
                 </span>
                 <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
             </a>
