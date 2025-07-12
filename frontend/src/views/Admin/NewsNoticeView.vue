@@ -23,7 +23,7 @@ import Footer from '@/views/Admin/include/FooterView.vue'
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- Content -->
                         <div class="card">
-                            <h5 class="card-header">Teachers List</h5>
+                            <h5 class="card-header">News & Notice List</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>

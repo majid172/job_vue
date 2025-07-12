@@ -5,6 +5,7 @@ import AdminLogin from '@/views/Admin/Auth/LoginView.vue';
 import AdminDashboard from '@/views/Admin/DashboardView.vue';
 import AdminStudents from '@/views/Admin/StudentView.vue';
 import AdminTeachers from '@/views/Admin/TeacherView.vue';
+import AdminNewsNotice from '@/views/Admin/NewsNoticeView.vue';
 // import { name } from '@vue/eslint-config-prettier/skip-formatting';
 
 const router = createRouter({
@@ -49,20 +50,20 @@ const router = createRouter({
           component: AdminTeachers
         },
         {
-          path: 'teachers',
-          name: 'admin.teacher',
-          component: AdminTeachers
+          path: 'news-notice',
+          name: 'admin.news_notice',
+          component: AdminNewsNotice
         },
-        {
-          path: 'teachers',
-          name: 'admin.teacher',
-          component: AdminTeachers
-        },
-        {
-          path: 'teachers',
-          name: 'admin.teacher',
-          component: AdminTeachers
-        },
+        // {
+        //   path: 'teachers',
+        //   name: 'admin.teacher',
+        //   component: AdminTeachers
+        // },
+        // {
+        //   path: 'teachers',
+        //   name: 'admin.teacher',
+        //   component: AdminTeachers
+        // },
 
       ]
 

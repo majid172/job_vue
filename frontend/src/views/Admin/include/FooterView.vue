@@ -1,29 +1,27 @@
 <template>
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row text-muted">
-                <div class="col-6 text-start">
-                    <p class="mb-0">
-                        <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a>
-                        - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin
-                                Template</strong></a> &copy;
-                    </p>
+    <footer class="content-footer footer bg-footer-theme">
+        <div class="container-xxl">
+            <div
+                class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                    &#169;
+
+                    , made with ❤️ by
+                    <a href="https://themeselection.com" target="_blank" class="footer-link">ThemeSelection</a>
                 </div>
-                <div class="col-6 text-end">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
-                        </li>
-                    </ul>
+                <div class="d-none d-lg-inline-block">
+                    <a href="https://themeselection.com/item/category/admin-templates/" target="_blank"
+                        class="footer-link me-4">Admin Templates</a>
+
+                    <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                    <a href="https://themeselection.com/item/category/bootstrap-admin-templates/" target="_blank"
+                        class="footer-link me-4">Bootstrap Dashboard</a>
+
+                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                        target="_blank" class="footer-link me-4">Documentation</a>
+
+                    <a href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free/issues"
+                        target="_blank" class="footer-link">Support</a>
                 </div>
             </div>
         </div>
