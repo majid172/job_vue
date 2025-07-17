@@ -1,8 +1,22 @@
 <script setup>
-import Aside from '@/views/Admin/include/AsideView.vue';
-import HeaderView from './include/HeaderView.vue';
+import Aside from '@/views/Admin/include/AsideView.vue'
+import HeaderView from './include/HeaderView.vue'
 import Footer from '@/views/Admin/include/FooterView.vue'
+
+import { useTeacherStore } from '@/stores/admin/teacher'
+import { onMounted } from 'vue'
+
+const teacherStore = useTeacherStore()
+
+onMounted(async () => {
+    try {
+        await teacherStore.fetchTeacher()
+    } catch (error) {
+        console.error('Failed to fetch teachers:', error)
+    }
+})
 </script>
+
 <template>
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -29,44 +43,42 @@ import Footer from '@/views/Admin/include/FooterView.vue'
                                     <thead>
                                         <tr>
                                             <th>SL.</th>
-                                            <th>Student Name</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
+                                            <th>Name</th>
+                                            <th>Subject</th>
+                                            <th>Job Title</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
 
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
+                                        <tr v-for="(teacher,index) in teacherStore.teachers">
                                             <td>
                                                 <i class="icon-base bx bxl-angular icon-md text-danger me-4"></i>
-                                                <span>Angular Project</span>
+                                                <span>{{ ++index }}</span>
                                             </td>
-                                            <td>Albert Cook</td>
                                             <td>
                                                 <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
                                                     <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
                                                         data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        title="Lilian Fuller">
-                                                        <img src="../assets/img/avatars/2.png" alt="Avatar"
-                                                            class="rounded-circle" />
+                                                        :title="teacher.name">
+                                                        <img :src="`/src/assets/admin/${teacher.image}`" alt="Avatar"
+                                                            class="rounded-circle" /> 
                                                     </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        title="Sophia Wilkerson">
-                                                        <img src="../assets/img/avatars/3.png" alt="Avatar"
-                                                            class="rounded-circle" />
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        title="Christina Parker">
-                                                        <img src="../assets/img/avatars/4.png" alt="Avatar"
-                                                            class="rounded-circle" />
-                                                    </li>
-                                                </ul>
+                                                    <li>{{ teacher.name }}</li>
+                                                    
+                                                </ul> 
                                             </td>
-                                            <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                            <td><span class="badge bg-label-primary me-1">Active</span></td>
+                                            <td>{{ teacher.subject }}</td>
+                                            <td>{{ teacher.job_title }}</td>
+                                            <td >
+                                                <span class="badge bg-label-primary me-1" v-if="teacher.active == 1">Active</span> 
+                                                <span class="badge bg-label-danger me-1" v-else>Deactive</span> 
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-info">Edit</button>
+                                            </td>
+
 
                                         </tr>
 
