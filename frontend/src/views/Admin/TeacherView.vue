@@ -76,9 +76,9 @@ onMounted(async () => {
                                                 <span class="badge bg-label-danger me-1" v-else>Deactive</span> 
                                             </td>
                                             <td>
-                                                <button class="btn btn-info">Edit</button>
+                                                <button class="btn btn-primary btn-sm me-2">Edit</button>
+                                                <button class="btn btn-danger btn-sm">Remove</button>
                                             </td>
-
 
                                         </tr>
 

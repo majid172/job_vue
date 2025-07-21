@@ -1,7 +1,40 @@
 <script setup>
 import Aside from '@/views/Admin/include/AsideView.vue';
 import HeaderView from './include/HeaderView.vue';
-import Footer from '@/views/Admin/include/FooterView.vue'
+import Footer from '@/views/Admin/include/FooterView.vue';
+import { onMounted, ref, computed } from 'vue';
+import { useStudentStore } from '@/stores/admin/student';
+
+const studentStore = useStudentStore();
+onMounted(() => {
+    studentStore.fetchStudent();
+})
+function goToPage(page) {
+    if (page >= 1 && page <= studentStore.lastPage) {
+        studentStore.fetchStudent(page);
+    }
+}
+
+const paginationPages = computed(() => {
+    const pages = [];
+    const total = studentStore.lastPage;
+    const current = studentStore.currentPage;
+
+    if (total <= 5) {
+        for (let i = 1; i <= total; i++) pages.push(i);
+    } else {
+        if (current <= 3) {
+            pages.push(1, 2, 3, '...', total);
+        } else if (current >= total - 2) {
+            pages.push(1, '...', total - 2, total - 1, total);
+        } else {
+            pages.push(1, '...', current, '...', total);
+        }
+    }
+
+    return pages;
+});
+
 </script>
 <template>
     <div class="layout-wrapper layout-content-navbar">
@@ -37,41 +70,55 @@ import Footer from '@/views/Admin/include/FooterView.vue'
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
-                                            <td>
-                                                <i class="icon-base bx bxl-angular icon-md text-danger me-4"></i>
-                                                <span>Angular Project</span>
-                                            </td>
-                                            <td>Albert Cook</td>
-                                            <td>
-                                                <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        title="Lilian Fuller">
-                                                        <img src="../assets/img/avatars/2.png" alt="Avatar"
-                                                            class="rounded-circle" />
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        title="Sophia Wilkerson">
-                                                        <img src="../assets/img/avatars/3.png" alt="Avatar"
-                                                            class="rounded-circle" />
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        title="Christina Parker">
-                                                        <img src="../assets/img/avatars/4.png" alt="Avatar"
-                                                            class="rounded-circle" />
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                            <td><span class="badge bg-label-primary me-1">Active</span></td>
-
+                                        <tr v-for="(student, index) in studentStore.students" :key="student.id">
+                                            <td>{{ index + 1 + (studentStore.currentPage - 1) * 20 }}</td>
+                                            <td>{{ student.name }}</td>
+                                            <td>{{ student.phone }}</td>
+                                            <td><span class="badge bg-label-success me-1">Active</span></td>
+                                            <td><span class="badge bg-label-info me-1">{{ student.email }}</span></td>
                                         </tr>
-
                                     </tbody>
                                 </table>
+                                <div class="m-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div class="mb-2">
+                                        Showing <strong>{{ studentStore.students.length }}</strong> of <strong>{{
+                                            studentStore.total }}</strong> students
+                                    </div>
+
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm mb-0">
+                                            <!-- Prev -->
+                                            <li class="page-item" :class="{ disabled: studentStore.currentPage === 1 }">
+                                                <a class="page-link" href="javascript:void(0);"
+                                                    @click="goToPage(studentStore.currentPage - 1)">
+                                                    <i class="bx bx-chevron-left"></i>
+                                                </a>
+                                            </li>
+
+                                            <!-- Pages -->
+                                            <li class="page-item" v-for="page in paginationPages" :key="page"
+                                                :class="{ active: page === studentStore.currentPage, disabled: page === '...' }">
+                                                <a class="page-link" v-if="page !== '...'" href="javascript:void(0);"
+                                                    @click="goToPage(page)">
+                                                    {{ page }}
+                                                </a>
+                                                <span class="page-link" v-else>…</span>
+                                            </li>
+
+                                            <!-- Next -->
+                                            <li class="page-item"
+                                                :class="{ disabled: studentStore.currentPage === studentStore.lastPage }">
+                                                <a class="page-link" href="javascript:void(0);"
+                                                    @click="goToPage(studentStore.currentPage + 1)">
+                                                    <i class="bx bx-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+
+
                             </div>
                         </div>
                     </div>

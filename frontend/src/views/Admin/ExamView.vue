@@ -12,7 +12,8 @@
                             <h5 class="card-title mb-0">Exam List</h5>
                         </div>
                         <div class="card-body">
-                            <table class="table">
+                            
+                            <!-- <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -42,7 +43,7 @@
                                     </tr>
 
                                 </tbody>
-                            </table>
+                            </table> -->
                         </div>
                     </div>
                 </div>
@@ -58,4 +59,5 @@
 import Aside from '@/views/Admin/include/AsideView.vue';
 import HeaderView from './include/HeaderView.vue';
 import Footer from '@/views/Admin/include/FooterView.vue'
+
 </script>
